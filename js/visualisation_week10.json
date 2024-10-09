@@ -1,15 +1,51 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "background": "white",
+    "padding": 5,
     "width": 700,
     "height": 500,
-    "title": "International Visitor Spending vs. Nights spent in Australia",
-    "data": {
-        "url": "https://raw.githubusercontent.com/AryaanH/FIT3179-Week10-Homework/refs/heads/main/data/australian_tourism_by_continent.csv",
-        "format": {
-            "type": "csv"
-        }
+    "title": {
+        "text": "International Visitor Spending vs. Nights spent in Australia",
+        "frame": "group"
     },
-    "params": [
+    "style": "cell",
+    "data": [
+        {
+            "name": "source_0",
+            "url": "https://raw.githubusercontent.com/AryaanH/FIT3179-Week10-Homework/refs/heads/main/data/australian_tourism_by_continent.csv",
+            "format": {
+                "type": "csv",
+                "delimiter": ","
+            },
+            "transform": [
+                {
+                    "type": "filter",
+                    "expr": "ContinentSelection == null || datum.Continent == ContinentSelection"
+                }
+            ]
+        },
+        {
+            "name": "data_0",
+            "source": "source_0",
+            "transform": [
+                {
+                    "type": "filter",
+                    "expr": "isValid(datum[\"Spending\"]) && isFinite(+datum[\"Spending\"]) && isValid(datum[\"Nights\"]) && isFinite(+datum[\"Nights\"]) && isValid(datum[\"Trips\"]) && isFinite(+datum[\"Trips\"])"
+                }
+            ]
+        },
+        {
+            "name": "data_1",
+            "source": "source_0",
+            "transform": [
+                {
+                    "type": "filter",
+                    "expr": "isValid(datum[\"Spending\"]) && isFinite(+datum[\"Spending\"]) && isValid(datum[\"Nights\"]) && isFinite(+datum[\"Nights\"])"
+                }
+            ]
+        }
+    ],
+    "signals": [
         {
             "name": "ContinentSelection",
             "bind": {
@@ -34,120 +70,236 @@
             }
         }
     ],
-    "transform": [
+    "marks": [
         {
-            "filter": "ContinentSelection == null || datum.Continent == ContinentSelection"
-        }
-    ],
-    "layer": [
-        {
-            "mark": {
-                "type": "circle",
-                "tooltip": true
+            "name": "layer_0_marks",
+            "type": "symbol",
+            "style": [
+                "circle"
+            ],
+            "from": {
+                "data": "data_0"
             },
-            "encoding": {
-                "x": {
-                    "field": "Spending",
-                    "type": "quantitative",
-                    "title": "Total Spending ($M)",
-                    "axis": {
-                        "grid": false,
-                        "tickCount": 5
+            "encode": {
+                "update": {
+                    "opacity": {
+                        "value": 0.7
                     },
-                    "scale": {
-                        "type": "log",
-                        "domain": [
-                            100,
-                            10000
-                        ]
-                    }
-                },
-                "y": {
-                    "field": "Nights",
-                    "type": "quantitative",
-                    "title": "Total Nights (000)",
-                    "axis": {
-                        "grid": false
-                    }
-                },
-                "size": {
-                    "field": "Trips",
-                    "type": "quantitative",
-                    "scale": {
-                        "range": [
-                            100,
-                            2000
-                        ]
+                    "tooltip": {
+                        "signal": "{\"Country\": isValid(datum[\"Countries\"]) ? datum[\"Countries\"] : \"\"+datum[\"Countries\"], \"Total Visitors (000)\": format(datum[\"Trips\"], \"\"), \"Spending ($M)\": format(datum[\"Spending\"], \"\"), \"Total Nights (000)\": format(datum[\"Nights\"], \"\")}"
                     },
-                    "legend": {
-                        "title": "Total Visitors (000)"
-                    }
-                },
-                "color": {
-                    "field": "Continent",
-                    "type": "nominal",
-                    "legend": {
-                        "title": "Continent"
-                    }
-                },
-                "tooltip": [
-                    {
-                        "field": "Countries",
-                        "type": "nominal",
-                        "title": "Country"
+                    "fill": {
+                        "scale": "color",
+                        "field": "Continent"
                     },
-                    {
-                        "field": "Trips",
-                        "type": "quantitative",
-                        "title": "Total Visitors (000)"
+                    "ariaRoleDescription": {
+                        "value": "circle"
                     },
-                    {
-                        "field": "Spending",
-                        "type": "quantitative",
-                        "title": "Spending ($M)"
+                    "description": {
+                        "signal": "\"Total Spending ($M): \" + (format(datum[\"Spending\"], \"\")) + \"; Total Nights (000): \" + (format(datum[\"Nights\"], \"\")) + \"; Continent: \" + (isValid(datum[\"Continent\"]) ? datum[\"Continent\"] : \"\"+datum[\"Continent\"]) + \"; Trips: \" + (format(datum[\"Trips\"], \"\")) + \"; Country: \" + (isValid(datum[\"Countries\"]) ? datum[\"Countries\"] : \"\"+datum[\"Countries\"]) + \"; Total Visitors (000): \" + (format(datum[\"Trips\"], \"\")) + \"; Spending ($M): \" + (format(datum[\"Spending\"], \"\"))"
                     },
-                    {
-                        "field": "Nights",
-                        "type": "quantitative",
-                        "title": "Total Nights (000)"
+                    "x": {
+                        "scale": "x",
+                        "field": "Spending"
+                    },
+                    "y": {
+                        "scale": "y",
+                        "field": "Nights"
+                    },
+                    "size": {
+                        "scale": "size",
+                        "field": "Trips"
+                    },
+                    "shape": {
+                        "value": "circle"
                     }
-                ]
+                }
             }
         },
         {
-            "mark": {
-                "type": "text",
-                "align": "left",
-                "baseline": "middle",
-                "dx": 12,
-                "dy": 2,
-                "fontSize": 11,
-                "fontStyle": "italic"
+            "name": "layer_1_marks",
+            "type": "text",
+            "style": [
+                "text"
+            ],
+            "from": {
+                "data": "data_1"
             },
-            "encoding": {
-                "x": {
-                    "field": "Spending",
-                    "type": "quantitative"
-                },
-                "y": {
-                    "field": "Nights",
-                    "type": "quantitative"
-                },
-                "text": {
-                    "field": "Countries",
-                    "type": "nominal"
-                },
-                "color": {
-                    "value": "black"
-                },
-                "opacity": {
-                    "condition": {
-                        "test": "datum['Countries'] == 'New Zealand' || datum['Countries'] == 'China' || datum['Countries'] == 'India' || datum['Countries'] == 'United States of America' || datum['Countries'] == 'Switzerland' || datum['Countries'] == 'United Kingdom'",
-                        "value": 1
+            "encode": {
+                "update": {
+                    "align": {
+                        "value": "left"
                     },
-                    "value": 0
+                    "baseline": {
+                        "value": "middle"
+                    },
+                    "dx": {
+                        "value": 12
+                    },
+                    "dy": {
+                        "value": 2
+                    },
+                    "fontSize": {
+                        "value": 11
+                    },
+                    "fontStyle": {
+                        "value": "italic"
+                    },
+                    "fill": {
+                        "value": "black"
+                    },
+                    "opacity": [
+                        {
+                            "test": "datum['Countries'] == 'New Zealand' || datum['Countries'] == 'China' || datum['Countries'] == 'India' || datum['Countries'] == 'United States of America' || datum['Countries'] == 'Switzerland' || datum['Countries'] == 'United Kingdom'",
+                            "value": 1
+                        },
+                        {
+                            "value": 0
+                        }
+                    ],
+                    "description": {
+                        "signal": "\"Spending: \" + (format(datum[\"Spending\"], \"\")) + \"; Nights: \" + (format(datum[\"Nights\"], \"\")) + \"; Countries: \" + (isValid(datum[\"Countries\"]) ? datum[\"Countries\"] : \"\"+datum[\"Countries\"])"
+                    },
+                    "x": {
+                        "scale": "x",
+                        "field": "Spending"
+                    },
+                    "y": {
+                        "scale": "y",
+                        "field": "Nights"
+                    },
+                    "text": {
+                        "signal": "isValid(datum[\"Countries\"]) ? datum[\"Countries\"] : \"\"+datum[\"Countries\"]"
+                    }
                 }
             }
         }
-    ]
+    ],
+    "scales": [
+        {
+            "name": "x",
+            "type": "log",
+            "domain": [
+                100,
+                10000
+            ],
+            "range": [
+                0,
+                {
+                    "signal": "width"
+                }
+            ],
+            "nice": true
+        },
+        {
+            "name": "y",
+            "type": "linear",
+            "domain": {
+                "fields": [
+                    {
+                        "data": "data_0",
+                        "field": "Nights"
+                    },
+                    {
+                        "data": "data_1",
+                        "field": "Nights"
+                    }
+                ]
+            },
+            "range": [
+                {
+                    "signal": "height"
+                },
+                0
+            ],
+            "nice": true,
+            "zero": true
+        },
+        {
+            "name": "color",
+            "type": "ordinal",
+            "domain": {
+                "data": "data_0",
+                "field": "Continent",
+                "sort": true
+            },
+            "range": "category"
+        },
+        {
+            "name": "size",
+            "type": "linear",
+            "domain": {
+                "data": "data_0",
+                "field": "Trips"
+            },
+            "range": [
+                100,
+                2000
+            ],
+            "zero": true
+        }
+    ],
+    "axes": [
+        {
+            "scale": "x",
+            "orient": "bottom",
+            "grid": false,
+            "title": "Total Spending ($M)",
+            "tickCount": 5,
+            "labelFlush": true,
+            "labelOverlap": "greedy",
+            "zindex": 0
+        },
+        {
+            "scale": "y",
+            "orient": "left",
+            "grid": false,
+            "title": "Total Nights (000)",
+            "labelOverlap": true,
+            "tickCount": {
+                "signal": "ceil(height/40)"
+            },
+            "zindex": 0
+        }
+    ],
+    "legends": [
+        {
+            "title": "Continent",
+            "fill": "color",
+            "symbolType": "circle",
+            "encode": {
+                "symbols": {
+                    "update": {
+                        "opacity": {
+                            "value": 0.7
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "title": "Total Visitors (000)",
+            "size": "size",
+            "symbolType": "circle",
+            "encode": {
+                "symbols": {
+                    "update": {
+                        "fill": {
+                            "value": "black"
+                        },
+                        "fillOpacity": {
+                            "value": 0.7
+                        },
+                        "opacity": {
+                            "value": 0.7
+                        },
+                        "stroke": {
+                            "value": "transparent"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "config": {}
 }
