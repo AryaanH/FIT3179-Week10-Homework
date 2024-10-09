@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Visitor Spending vs. Nights spent in Australia</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Load Vega & Vega-Lite libraries from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
+</head>
+
+<body>
+    <h1>Visitor Spending vs. Nights in Australia by Continent</h1>
+    <div id="vis"></div>
+
+    <script type="text/javascript">
+        var spec = "js/visualisation_week10.json";  // Path to the Vega-Lite JSON file
+
+        // Use vegaEmbed to load the visualization into the div with id="choropleth_map"
+        vegaEmbed('#choropleth_map', spec).then(function (result) {
+            // You can access the Vega view instance as result.view here if needed
+        }).catch(console.error);  // Catch any errors and log them to the console
+    </script>
+</body>
+
+</html>
