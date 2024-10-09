@@ -1,26 +1,26 @@
 Continent,Countries,Trips,Spending,Nights
-Oceania,New Zealand,"1,235","2,073","14,255"
-Asia,Japan,329,"1,338","11,543"
-Asia,Hong Kong,194,921,"5,239"
-Asia,Singapore,340,"1,125","5,131"
-Asia,Malaysia,177,697,"5,765"
-Asia,Indonesia,194,855,"8,816"
-Asia,Taiwan,139,782,"8,809"
-Asia,Thailand,89,442,"4,924"
-Asia,Vietnam,165,837,"7,461"
-Asia,Philippines,159,503,"10,073"
-Asia,Korea,322,"1,391","8,497"
-Asia,China,746,"7,613","41,939"
-Asia,India,395,"1,420","25,397"
-Asia,Other Asia(c),200,"1,085","13,485"
-North America,United States of America,670,"2,054","11,481"
-North America,Canada,155,568,"4,502"
-Europe,United Kingdom,581,"2,115","21,176"
-Europe,Germany,152,657,"6,382"
-Europe,Scandinavia,79,327,"2,868"
-Europe,France,118,629,"8,380"
-Europe,Italy,62,255,"3,934"
-Europe,Netherlands,49,247,"2,080"
-Europe,Switzerland,41,230,"1,468"
-Europe,Other Europe,251,"1,028","12,911"
-Other,Other Countries,513,"2,524","31,652"
+Oceania,New Zealand,1235,2073,14255
+Asia,Japan,329,1338,11543
+Asia,Hong Kong,194,921,5239
+Asia,Singapore,340,1125,5131
+Asia,Malaysia,177,697,5765
+Asia,Indonesia,194,855,8816
+Asia,Taiwan,139,782,8809
+Asia,Thailand,89,442,4924
+Asia,Vietnam,165,837,7461
+Asia,Philippines,159,503,10073
+Asia,Korea,322,1391,8497
+Asia,China,746,7613,41939
+Asia,India,395,1420,25397
+Asia,Other Asia(c),200,1085,13485
+North America,United States of America,670,2054,11481
+North America,Canada,155,568,4502
+Europe,United Kingdom,581,2115,21176
+Europe,Germany,152,657,6382
+Europe,Scandinavia,79,327,2868
+Europe,France,118,629,8380
+Europe,Italy,62,255,3934
+Europe,Netherlands,49,247,2080
+Europe,Switzerland,41,230,1468
+Europe,Other Europe,251,1028,12911
+Other,Other Countries,513,2524,31652
