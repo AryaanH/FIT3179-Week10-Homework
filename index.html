@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Visitor Spending vs. Nights in Australia by Continent</title>
+    <title>Australian Tourism Data Visualizations</title>
     <link rel="stylesheet" href="css/styles.css">
     <!-- Load Vega & Vega-Lite libraries from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
@@ -12,14 +12,26 @@
 </head>
 
 <body>
-    <h1>Visitor Spending vs. Nights in Australia by Continent</h1>
-    <div id="vis"></div>
+    <h1>Australian Tourism Data Visualizations</h1>
+
+    <!-- Week 9 Visualization -->
+    <div id="week9-vis" style="margin-bottom: 30px;">
+        <h2>Week 9: Total Visitors by State</h2>
+        <iframe src="https://aryaanh.github.io/FIT3179-WEEK9-Homework/" width="800" height="600" style="border: none;">
+        </iframe>
+    </div>
+
+    <!-- Week 10 Visualization -->
+    <div id="week10-vis">
+        <h2>Week 10: Visitor Spending vs. Nights in Australia by Continent</h2>
+        <div id="vis"></div>
+    </div>
 
     <script type="text/javascript">
-        // Link to your Vega-Lite JSON specification file
+        // Link to your Week 10 Vega-Lite JSON specification file
         var spec = "js/visualisation_week10.json";
 
-        // Embed the visualization in the "vis" div
+        // Embed the Week 10 visualization in the "vis" div
         vegaEmbed('#vis', spec).then(function (result) {
             // Access the Vega view instance as result.view if needed
         }).catch(console.error);
